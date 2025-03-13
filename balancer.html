@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Equation Balancer</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="balancer.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <main>
+        <h1 class="title" style="margin-top: -70px;">
+            <span class="static-text">Balance</span>
+            <span class="color-changing-text">Here.</span>
+        </h1>
+
+        <div class="ai-container">
+            <input class="item" type="text" id="equation" placeholder="E.g. H2 + O2 = H2O">
+            <div id="result">Result Will Appear Here</div>
+        </div>
+
+        <div class="button-container">
+            <button id="ali0" onclick="balanceEquation()" class="balance-button">Balance</button>
+        </div>
+
+        <script src="chem-balancer.js" defer></script>
+        <script src="script.js" defer></script>
+    </main>
+</body>
+
+</html>

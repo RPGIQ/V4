@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="balancer.css" rel="stylesheet" type="text/css" />
+    <link href="Header.css" rel="stylesheet" type="text/css" />
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .site-header {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-menu ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            opacity: 0;
+            transform: scale(0.95); /* بداية من مقياس أصغر */
+            transition: opacity 0.8s ease, transform 0.8s ease; /* أنميشن سلس */
+        }
+        iframe.loaded {
+            opacity: 1;
+            transform: scale(1); /* العودة للحجم الطبيعي */
+        }
+    </style>
+    <script>
+        function loadPage(page) {
+            var iframe = document.getElementById('content-frame');
+            iframe.classList.remove('loaded'); // إعادة تعيين الأنميشن
+            setTimeout(function() {
+                iframe.src = page; // تغيير مصدر الـ iframe بعد التأخير
+            }, 500); // تأخير قبل تحميل الصفحة الجديدة
+        }
+
+        function onIframeLoad() {
+            document.getElementById('content-frame').classList.add('loaded'); // إضافة الأنميشن عند تحميل الصفحة
+        }
+    </script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="logo">
+            <h1 class="head">Alwaely <span class="RGB">AI</span></h1>
+        </div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="javascript:void(0);" onclick="loadPage('solver.html')">AI Solver</a></li>
+                <li><a href="javascript:void(0);" onclick="loadPage('balancer.html')">Balancer</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content">
+        <iframe id="content-frame" src="" frameborder="0" onload="onIframeLoad()"></iframe>
+    </main>
+</body>
+</html>

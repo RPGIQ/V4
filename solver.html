@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="solver.css">
+  <title>Chemical Equation Solver</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "@google/generative-ai": "https://esm.run/@google/generative-ai"
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+  <div class="ai-container" style="width: 100%; margin-top: -100px;">
+    <h1 class="title" style="width: 100%;white-space: nowrap;margin-top: -100px;">
+      <span style="color: #e6e6e6; font-size: 110px;">Solve With </span><span class="ai">AI</span>
+    </h1>
+  </div>
+
+  <div class="container">
+    <textarea id="equation-input" placeholder="Solve Equation With AI Here."></textarea>
+    <div id="result">Result will appear here</div>
+  </div>
+
+  <button id="solve-button">Solve Equation</button>
+
+  <script type="module">
+    import { GoogleGenerativeAI } from "@google/generative-ai";
+
+    const API_KEY = "AIzaSyBMcbv1i-Yr9Bji4wQPLvlsRdaR4oNWxHo";
+    const genAI = new GoogleGenerativeAI(API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+
+    async function solveEquation() {
+      const equation = document.getElementById('equation-input').value.trim();
+
+      if (!equation) {
+        document.getElementById('result').innerText = "Please enter a chemical equation.";
+        return;
+      }
+
+      const prompt = `Solve this chemical equation: ${equation}`;
+      try {
+        const result = await model.generateContent(prompt);
+
+        if (result && result.response && typeof result.response.text === 'function') {
+          document.getElementById('result').innerText = "Solution: " + result.response.text().trim();
+        } else {
+          document.getElementById('result').innerText = "Error: Unexpected response format.";
+        }
+      } catch (error) {
+        console.error('Error occurred while solving the equation:', error);
+        document.getElementById('result').innerText = "Error: " + (error.message || 'An unknown error occurred.');
+      }
+    }
+
+    document.getElementById('solve-button').onclick = solveEquation;
+  </script>
+
+</body>
+
+</html>

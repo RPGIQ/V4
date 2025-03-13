@@ -1,0 +1,246 @@
+/* تنسيق الجسم والنصوص */
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: "DM Sans", sans-serif;
+  background-color: #212121;
+  color: #fff;
+  height: 100vh; /* جعل ارتفاع الجسم يملأ الشاشة */
+  overflow: hidden; /* منع التمرير الخارجي */
+}
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(-30px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.page-content {
+  display: none;
+  animation: fadeIn 1s forwards;
+}
+
+.fadeIn {
+  animation: fadeIn 1s forwards;
+}
+
+/* تنسيق الحاوية */
+.container {
+  display: flex;
+  justify-content: center; /* محاذاة العناصر في الوسط */
+  align-items: flex-start; /* محاذاة العناصر من أعلى الصفحة */
+  width: 80%; /* عرض الحاوية */
+  margin: 0 auto; /* محاذاة الحاوية في الوسط */
+}
+
+/* تنسيق القسم الأيسر */
+.form-section {
+  display: flex;
+  flex-direction: column; /* ترتيب العناصر عمودياً */
+  align-items: flex-start; /* محاذاة العناصر على اليسار */
+  margin-right: 20px; /* إضافة مسافة بين القسمين */
+  animation: slideIn 0.5s ease-in-out; /* تأثير دخول */
+}
+
+/* تنسيق العنوان */
+h1 {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 4rem;
+  color: #ffffff;
+  text-align: center; /* محاذاة العنوان في الوسط */
+  width: 100%; /* جعل العنوان يأخذ عرض الحاوية */
+  margin-bottom: 40px; /* زيادة المسافة بين العنوان والعناصر السفلية */
+  animation: slideIn 0.5s ease-in-out; /* تأثير دخول */
+}
+
+/* تنسيق صناديق الاختيار */
+label {
+  font-size: 1.2em;
+  color: #ffffff;
+}
+
+select {
+  width: 250px; /* زيادة عرض قوائم الاختيار */
+  padding: 15px; /* زيادة البادينج */
+  border-radius: 10px;
+  border: 2px solid #333333;
+  background-color: #333333;
+  color: #fafafa;
+  margin: 15px 0; /* إضافة مسافة رأسية فقط */
+  transition: background-color 0.3s, box-shadow 0.3s ease; /* تأثيرات سلسة */
+}
+
+select:hover {
+  background-color: #474747; /* تغيير لون الخلفية عند التمرير */
+  box-shadow: 0 0 10px 2px rgb(255, 255, 255); /* تأثير الظل المتوهج */
+}
+
+/* تنسيق الزر */
+button {
+  padding: 15px 25px; /* زيادة حجم الزر */
+  border-radius: 20px;
+  background-color: #424242; /* لون الخلفية */
+  border: 2px solid #333333;
+  color: #fafafa; /* لون النص */
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; /* تأثيرات سلسة */
+  margin-top: 10px; /* إضافة مسافة فوق الزر */
+}
+
+button:hover {
+  background-color: #616161; /* تغيير لون الخلفية عند التحويم */
+  transform: scale(1.05); /* تكبير الزر عند التحويم */
+  box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7); /* إضافة ظل أبيض */
+}
+
+/* تنسيق نتيجة التحليل */
+.result {
+  margin-top: 60px; /* زيادة المسافة من الأعلى */
+  padding: 20px; /* زيادة البادينج لجعل المربع أكبر */
+  border: 2px solid #333333;
+  border-radius: 20px;
+  background-color: #474747; /* لون الخلفية الرمادي */
+  color: #fafafa; /* لون النص الافتراضي */
+  text-align: center; /* محاذاة النص في الجهة الوسطى */
+  width: 66%; /* جعل العرض 100% لملء المساحة */
+  height: auto; /* يمكن ضبط الارتفاع كما ترغب */
+  position: absolute; /* جعل العنصر يظهر في موقع محدد */
+  right: 0; /* محاذاة العنصر إلى اليمين */
+  top: 100px; /* وضع المسافة من الأعلى حسب الحاجة */
+  margin-right: 30px;
+  animation: slideIn 0.5s ease-in-out; /* تأثير دخول */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* إضافة تأثير الانتقال */
+}
+
+.result:hover {
+  box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7); /* إضافة تأثير الظل الأبيض عند التحويم */
+  transform: scale(1.05); /* تكبير النتيجة قليلاً عند التحويم */
+}
+
+/* تنسيقات مختلفة للنتيجة بناءً على مستوى الخطر */
+.result.low-risk {
+  color: #4caf50; /* لون نص للخطر المنخفض (أخضر) */
+}
+
+.result.medium-risk {
+  color: #ffeb3b; /* لون نص للخطر المتوسط (أصفر) */
+}
+
+.result.high-risk {
+  color: #f44336; /* لون نص للخطر العالي (أحمر) */
+}
+
+/* تنسيق الهيدر */
+.site-header {
+  background: rgb(51, 51, 51, 0.7);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body::before {
+  content: '';
+  display: block;
+  height: 80px;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.nav-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.nav-menu li {
+  margin-left: 20px;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.1em;
+  transition: color 0.3s, text-shadow 0.3s; /* تأثيرات سلسة */
+}
+
+.nav-menu a:hover {
+  text-decoration: underline;
+  color: #00ccff; /* تغيير لون الرابط عند التحويم */
+  text-shadow: 0 0 10px #00ccff; /* تأثير الظل المتوهج للأزرق */
+}
+
+/* تنسيق النصوص المتغيرة */
+#ali0 {
+  font-weight: bold;
+  animation: colorChange 5s infinite;
+}
+
+.title {
+  font-size: 130px;
+  color: #212121;
+}
+
+.head {
+  color: #ffffff;
+}
+
+.RGB {
+  font-size: 1.1em;
+  font-weight: bold;
+  animation: colorChange 5s infinite;
+}
+
+.static-text {
+  color: #ffffff; /* اللون الرمادي الثابت */
+}
+
+.color-changing-text {
+  font-size: 0.7em;
+  font-weight: bold;
+  animation: colorChange 5s infinite;
+}
+
+/* تأثيرات تغيير اللون */
+@keyframes colorChange {
+  0% { color: #c8ff00; }
+  25% { color: #37ff00; }
+  50% { color: #00ccff; }
+  75% { color: #ee00ff; }
+  100% { color: #eeff00; }
+}
+
+::-webkit-scrollbar {
+  width: 12px; /* عرض شريط التمرير */
+}
+
+::-webkit-scrollbar-track {
+  background: #333333; /* لون خلفية الشريط (المسار) */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #212121;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(51, 51, 51, 0.7);/* لون الشريط عند التمرير */
+}

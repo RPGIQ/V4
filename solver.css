@@ -1,0 +1,172 @@
+/* General Body and Text Styles */
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: "DM Sans", sans-serif;
+  background-color: #212121;
+  color: #fff;
+  display: flex;
+  flex-direction: column; /* Direction vertical */
+  align-items: center; /* Center content */
+  justify-content: center; /* Center vertically */
+  height: 100vh; /* Full height */
+}
+
+/* Header Styling */
+.site-header {
+  background: rgba(51, 51, 51, 0.7);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body::before {
+  content: '';
+  display: block;
+  height: 80px; /* To push content below fixed header */
+}
+
+/* Title and Static Text */
+.ai-container {
+  text-align: center;
+  margin-top: 100px; /* Space for header */
+  animation: slideIn 0.5s ease-in-out; /* Effect for entrance */
+}
+
+.title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 130px; /* Increased for emphasis */
+  color: #ffffff;
+  text-align: center;
+}
+
+.ai {
+  font-size: 1em;
+  font-weight: bold;
+  animation: colorChange 5s infinite; /* Color changing animation */
+}
+
+/* Color Change Animation */
+@keyframes colorChange {
+  0% { color: #c8ff00; }
+  25% { color: #37ff00; }
+  50% { color: #00ccff; }
+  75% { color: #ee00ff; }
+  100% { color: #eeff00; }
+}
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(-30px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.page-content {
+  display: none;
+  animation: fadeIn 1s forwards;
+}
+
+.fadeIn {
+  animation: fadeIn 1s forwards;
+}
+
+
+/* Input and Output Styles */
+.input-output-container {
+  display: flex;
+  flex-direction: column; /* Align items vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  max-width: 800px; /* Set maximum width for input/output container */
+  width: 100%;
+  margin: 20px auto; /* Center the container */
+  animation: slideIn 0.5s ease-in-out; /* Effect for entrance */
+}
+
+textarea#equation-input,
+#result {
+  width: 800px; /* Set suitable width */
+  min-height: 100px; /* Minimum height */
+  max-height: 300px; /* Maximum height for result box */
+  padding: 10px; /* Internal spacing */
+  background-color: #333;
+  border-radius: 20px;
+  font-size: 1.2em;
+  color: #fafafa;
+  border: 2px solid #333333;
+  display: block; /* Block display for full width */
+  white-space: pre-wrap; /* Preserve white spaces and line breaks */
+  overflow-y: auto; /* Vertical scrollbar */
+  word-wrap: break-word; /* Break long words */
+  text-align: center; /* Align text to the center */
+  resize: none; /* Disable resizing for input */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s; /* Smooth transitions */
+}
+
+textarea#equation-input {
+  height: 70px; /* Fixed height for input */
+  margin-bottom: 20px; /* Space below input */
+}
+
+/* Focus and Hover Effects for Input Areas */
+textarea#equation-input:focus,
+#result:focus {
+  border-color: #c8ff00; /* Highlight border color on focus */
+}
+
+textarea#equation-input:hover,
+#result:hover {
+  box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7); /* White shadow effect */
+  transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+/* Button Styling */
+button#solve-button {
+  padding: 15px 30px;
+  border-radius: 20px;
+  background-color: #212121;
+  border: 2px solid #333333;
+  color: #fff;
+  font-size: 1.3em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  margin-top: 20px; /* Space above button */
+}
+
+button#solve-button:hover {
+  background-color: #e6e6e6;
+  color: #000;
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+  box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7); /* White shadow effect */
+}
+
+::-webkit-scrollbar {
+  width: 12px; /* عرض شريط التمرير */
+}
+
+::-webkit-scrollbar-track {
+  background: #333333; /* لون خلفية الشريط (المسار) */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #212121;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(51, 51, 51, 0.7);/* لون الشريط عند التمرير */
+}

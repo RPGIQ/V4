@@ -1,0 +1,223 @@
+/* تنسيق الجسم والنصوص */
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: "DM Sans", sans-serif;
+    background-color: #212121;
+    color: #fff;
+    overflow-y: auto; /* عرض شريط التمرير الرأسي فقط عند الحاجة */
+    overflow-x: hidden; /* منع التمرير الأفقي */
+    height: 100%;
+    position: relative; /* للسماح بالتراكب */
+}
+
+/* تأثير دخول العناصر */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-content {
+    display: none;
+    animation: fadeIn 1s forwards;
+}
+
+.fadeIn {
+    animation: fadeIn 1s forwards;
+}
+
+
+/* تنسيق العنوان */
+.title {
+    margin: 0;
+    line-height: 1.15;
+    font-size: 4rem;
+    color: #303030;
+    text-align: center;
+    animation: slideIn 1s ease-in-out; /* تأثير دخول */
+    position: relative; /* لجعل العناوين فوق الخلفية */
+    z-index: 2; /* فوق الخلفية */
+}
+
+.static-text {
+    color: #ffffff; /* اللون الرمادي الثابت */
+}
+
+.color-changing-text {
+    font-size: 0.7em;
+    font-weight: bold;
+    animation: colorChange 5s infinite;
+}
+
+@keyframes colorChange {
+    0% { color: #c8ff00; }
+    25% { color: #37ff00; }
+    50% { color: #00ccff; }
+    75% { color: #ee00ff; }
+    100% { color: #eeff00; }
+}
+
+/* تنسيق صندوق الإدخال والزر */
+.ai-container {
+    text-align: center;
+    margin: 1rem auto;
+    padding: 1rem 0.5rem;
+    display: flex; /* استخدام Flexbox لمحاذاة العناصر في صف */
+    justify-content: center; /* محاذاة العناصر في الوسط */
+    gap: 10px; /* المسافة بين العناصر */
+    animation: slideIn 1s ease-in-out; /* تأثير دخول */
+    position: relative; /* لجعل المحتوى فوق الخلفية */
+    z-index: 2; /* فوق الخلفية */
+}
+
+#equation, #result {
+    width: 400px; /* تعيين عرض ثابت لحقل الإدخال */
+    height: 150px; /* ارتفاع ثابت */
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 1em;
+    box-sizing: border-box;
+    border: 2.5px solid #333333;
+    background-color: #333333;
+    color: #fafafa;
+    margin: 10px; /* إضافة مسافة حول حقل الإدخال */
+    text-align: center; /* محاذاة النص في الجهة الوسطى */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* تأثير عند التحرك */
+}
+
+#equation:hover, #result:hover {
+    transform: scale(1.05); /* تكبير عند المرور */
+    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7); /* ظل أبيض */
+}
+
+.button-container {
+    text-align: center; /* محاذاة الزر في الوسط */
+    margin-top: 20px; /* إضافة مسافة فوق الزر */
+    padding-bottom: 30px; /* إضافة مسافة أسفل الحاوية لضمان عدم قطع التأثيرات */
+    animation: slideIn 1s ease-in-out; /* تأثير دخول */
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #212121; /* خلفية الزر */
+    border: 2px solid #333333;
+    color: black;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s ease; /* تأثيرات سلسة */
+}
+
+button:hover {
+    background-color: #333333;
+    transform: scale(1.1); /* تكبير الزر عند التمرير */
+    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7); /* ظل أبيض */
+}
+
+button.balance {
+    background-color: #ff0000; /* لون زر balance */
+}
+
+button.balance:hover {
+    background-color: #ff0000; /* لون عند التمرير */
+}
+
+button i {
+    font-size: 1.2em;
+}
+
+/* تنسيق الهيدر */
+.site-header {
+    background: rgb(51, 51, 51, 0.7);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+}
+
+body::before {
+    content: '';
+    display: block;
+    height: 80px;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.nav-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-menu li {
+    margin-left: 20px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.1em;
+    transition: transform 0.3s ease;
+    display: inline-block; /* لإتاحة التأثير */
+}
+
+.nav-menu a:hover {
+    text-decoration: underline;
+    transform: scale(1.2); /* تكبير النص عند التمرير */
+}
+
+#ali0 {
+    font-weight: bold;
+    animation: colorChange 5s infinite;
+}
+
+.title {
+    font-size: 130px;
+    color: #212121;
+}
+
+.head {
+    color: #ffffff;
+}
+
+.RGB {
+    font-size: 1.1em;
+    font-weight: bold;
+    animation: colorChange 5s infinite;
+}
+
+::-webkit-scrollbar {
+    width: 12px; /* عرض شريط التمرير */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #333333; /* لون خلفية الشريط (المسار) */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #212121;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(51, 51, 51, 0.7);/* لون الشريط عند التمرير */
+  }
+  

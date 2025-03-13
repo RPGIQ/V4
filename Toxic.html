@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Toxic.css">
+
+    <title>Drug Toxicity Analysis</title>
+    <style>
+        body{
+            overflow: hidden;
+        }
+                .result {
+            background-color: gray; /* لون خلفية رمادي */
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-size: 1.5em;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        select {
+            width: 200px;
+            padding: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .result {
+            margin-top: 80px;
+            padding: 15px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            display: none;
+            font-size: 30px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .Very\ Low {
+            background-color: #333;
+            color: #00ff3c;
+        }
+        .Low {
+            background-color: #333;
+            color: #007bff;
+        }
+        .Moderate {
+            background-color: #333;
+            color: #ffbf00;
+        }
+        .High {
+            background-color: #333;
+            color: #ff0019;
+        }
+        .Severe {
+            background-color: #333;
+            color: #9d0010;
+        }
+        .Extremely\ Dangerous {
+            background-color: #333;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="title" style="margin-top: -100px;">
+        <span class="static-text">Toxic</span>
+        <span class="color-changing-text">Counter.</span>
+    </h1>
+
+
+    <label for="medication">Select Medication:</label>
+    <select id="medication">
+        <option value="">Choose a drug</option>
+        <option value="paracetamol">Paracetamol</option>
+        <option value="ibuprofen">Ibuprofen</option>
+        <option value="metformin">Metformin</option>
+        <option value="aspirin">Aspirin</option>
+        <option value="omeprazole">Omeprazole</option>
+        <option value="loratadine">Loratadine</option>
+        <option value="atorvastatin">Atorvastatin</option>
+        <option value="alprazolam">Alprazolam</option>
+    </select>
+
+    <label for="temperature">Select Temperature (°C):</label>
+    <select id="temperature">
+        <option value="">Choose temperature</option>
+        <option value="50">50</option>
+        <option value="60">60</option>
+        <option value="70">70</option>
+    </select>
+
+    <label for="duration">Select Exposure Duration (minutes):</label>
+    <select id="duration">
+        <option value="">Choose duration</option>
+        <option value="30">30</option>
+        <option value="60">60</option>
+        <option value="90">90</option>
+        <option value="120">120</option>
+        <option value="150">150</option>
+        <option value="180">180</option>
+        <option value="210">210</option>
+        <option value="240">240</option>
+        <option value="270">270</option>
+        <option value="300">300</option>
+    </select>
+
+    <button id="calculateBtn">Calculate Toxicity</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        const data = {
+            paracetamol: {
+                50: {30: {toxicity: "≈ 1%", risk: "Very Low"}, 60: {toxicity: "≈ 2%", risk: "Low"}, 90: {toxicity: "≈ 5%", risk: "Low"}, 120: {toxicity: "≈ 8%", risk: "Low"}, 150: {toxicity: "≈ 10%", risk: "Moderate"}, 180: {toxicity: "≈ 12%", risk: "Moderate"}, 210: {toxicity: "≈ 15%", risk: "Moderate"}, 240: {toxicity: "≈ 18%", risk: "High"}, 270: {toxicity: "≈ 20%", risk: "High"}, 300: {toxicity: "≈ 22%", risk: "Severe"}},
+                60: {30: {toxicity: "≈ 5%", risk: "Low"}, 60: {toxicity: "≈ 10%", risk: "Moderate"}, 90: {toxicity: "≈ 15%", risk: "High"}, 120: {toxicity: "≈ 20%", risk: "High"}, 150: {toxicity: "≈ 25%", risk: "Severe"}, 180: {toxicity: "≈ 30%", risk: "Severe"}, 210: {toxicity: "≈ 35%", risk: "Severe"}, 240: {toxicity: "≈ 40%", risk: "Severe"}, 270: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 60%", risk: "Extremely Dangerous"}},
+                70: {30: {toxicity: "≈ 10%", risk: "Moderate"}, 60: {toxicity: "≈ 15%", risk: "High"}, 90: {toxicity: "≈ 20%", risk: "High"}, 120: {toxicity: "≈ 25%", risk: "Severe"}, 150: {toxicity: "≈ 30%", risk: "Severe"}, 180: {toxicity: "≈ 35%", risk: "Severe"}, 210: {toxicity: "≈ 40%", risk: "Severe"}, 240: {toxicity: "≈ 45%", risk: "Severe"}, 270: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 60%", risk: "Extremely Dangerous"}}
+            },
+            ibuprofen: {
+                50: {30: {toxicity: "≈ 1%", risk: "Very Low"}, 60: {toxicity: "≈ 2%", risk: "Low"}, 90: {toxicity: "≈ 3%", risk: "Low"}, 120: {toxicity: "≈ 4%", risk: "Low"}, 150: {toxicity: "≈ 5%", risk: "Moderate"}, 180: {toxicity: "≈ 6%", risk: "Moderate"}, 210: {toxicity: "≈ 7%", risk: "Moderate"}, 240: {toxicity: "≈ 8%", risk: "High"}, 270: {toxicity: "≈ 9%", risk: "High"}, 300: {toxicity: "≈ 10%", risk: "Severe"}},
+                60: {30: {toxicity: "≈ 5%", risk: "Low"}, 60: {toxicity: "≈ 10%", risk: "Moderate"}, 90: {toxicity: "≈ 15%", risk: "High"}, 120: {toxicity: "≈ 20%", risk: "High"}, 150: {toxicity: "≈ 25%", risk: "Severe"}, 180: {toxicity: "≈ 30%", risk: "Severe"}, 210: {toxicity: "≈ 35%", risk: "Severe"}, 240: {toxicity: "≈ 40%", risk: "Severe"}, 270: {toxicity: "≈ 45%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}},
+                70: {30: {toxicity: "≈ 10%", risk: "Moderate"}, 60: {toxicity: "≈ 15%", risk: "High"}, 90: {toxicity: "≈ 20%", risk: "High"}, 120: {toxicity: "≈ 25%", risk: "Severe"}, 150: {toxicity: "≈ 30%", risk: "Severe"}, 180: {toxicity: "≈ 35%", risk: "Severe"}, 210: {toxicity: "≈ 40%", risk: "Severe"}, 240: {toxicity: "≈ 45%", risk: "Severe"}, 270: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 60%", risk: "Extremely Dangerous"}}
+            },
+            metformin: {
+                50: {30: {toxicity: "≈ 1%", risk: "Very Low"}, 60: {toxicity: "≈ 2%", risk: "Low"}, 90: {toxicity: "≈ 3%", risk: "Low"}, 120: {toxicity: "≈ 4%", risk: "Low"}, 150: {toxicity: "≈ 5%", risk: "Moderate"}, 180: {toxicity: "≈ 6%", risk: "Moderate"}, 210: {toxicity: "≈ 7%", risk: "Moderate"}, 240: {toxicity: "≈ 8%", risk: "High"}, 270: {toxicity: "≈ 9%", risk: "High"}, 300: {toxicity: "≈ 10%", risk: "Severe"}},
+                60: {30: {toxicity: "≈ 5%", risk: "Low"}, 60: {toxicity: "≈ 10%", risk: "Moderate"}, 90: {toxicity: "≈ 15%", risk: "High"}, 120: {toxicity: "≈ 20%", risk: "High"}, 150: {toxicity: "≈ 25%", risk: "Severe"}, 180: {toxicity: "≈ 30%", risk: "Severe"}, 210: {toxicity: "≈ 35%", risk: "Severe"}, 240: {toxicity: "≈ 40%", risk: "Severe"}, 270: {toxicity: "≈ 45%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}},
+                70: {30: {toxicity: "≈ 10%", risk: "Moderate"}, 60: {toxicity: "≈ 15%", risk: "High"}, 90: {toxicity: "≈ 20%", risk: "High"}, 120: {toxicity: "≈ 25%", risk: "Severe"}, 150: {toxicity: "≈ 30%", risk: "Severe"}, 180: {toxicity: "≈ 35%", risk: "Severe"}, 210: {toxicity: "≈ 40%", risk: "Severe"}, 240: {toxicity: "≈ 45%", risk: "Severe"}, 270: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 60%", risk: "Extremely Dangerous"}}
+            },
+            aspirin: {
+                50: {30: {toxicity: "≈ 1%", risk: "Very Low"}, 60: {toxicity: "≈ 2%", risk: "Low"}, 90: {toxicity: "≈ 3%", risk: "Low"}, 120: {toxicity: "≈ 4%", risk: "Low"}, 150: {toxicity: "≈ 5%", risk: "Moderate"}, 180: {toxicity: "≈ 6%", risk: "Moderate"}, 210: {toxicity: "≈ 7%", risk: "Moderate"}, 240: {toxicity: "≈ 8%", risk: "High"}, 270: {toxicity: "≈ 9%", risk: "High"}, 300: {toxicity: "≈ 10%", risk: "Severe"}},
+                60: {30: {toxicity: "≈ 5%", risk: "Low"}, 60: {toxicity: "≈ 10%", risk: "Moderate"}, 90: {toxicity: "≈ 15%", risk: "High"}, 120: {toxicity: "≈ 20%", risk: "High"}, 150: {toxicity: "≈ 25%", risk: "Severe"}, 180: {toxicity: "≈ 30%", risk: "Severe"}, 210: {toxicity: "≈ 35%", risk: "Severe"}, 240: {toxicity: "≈ 40%", risk: "Severe"}, 270: {toxicity: "≈ 45%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}},
+                70: {30: {toxicity: "≈ 10%", risk: "Moderate"}, 60: {toxicity: "≈ 15%", risk: "High"}, 90: {toxicity: "≈ 20%", risk: "High"}, 120: {toxicity: "≈ 25%", risk: "Severe"}, 150: {toxicity: "≈ 30%", risk: "Severe"}, 180: {toxicity: "≈ 35%", risk: "Severe"}, 210: {toxicity: "≈ 40%", risk: "Severe"}, 240: {toxicity: "≈ 45%", risk: "Severe"}, 270: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 60%", risk: "Extremely Dangerous"}}
+            },
+            omeprazole: {
+                50: {30: {toxicity: "≈ 1%", risk: "Very Low"}, 60: {toxicity: "≈ 2%", risk: "Low"}, 90: {toxicity: "≈ 3%", risk: "Low"}, 120: {toxicity: "≈ 4%", risk: "Low"}, 150: {toxicity: "≈ 5%", risk: "Moderate"}, 180: {toxicity: "≈ 6%", risk: "Moderate"}, 210: {toxicity: "≈ 7%", risk: "Moderate"}, 240: {toxicity: "≈ 8%", risk: "High"}, 270: {toxicity: "≈ 9%", risk: "High"}, 300: {toxicity: "≈ 10%", risk: "Severe"}},
+                60: {30: {toxicity: "≈ 5%", risk: "Low"}, 60: {toxicity: "≈ 10%", risk: "Moderate"}, 90: {toxicity: "≈ 15%", risk: "High"}, 120: {toxicity: "≈ 20%", risk: "High"}, 150: {toxicity: "≈ 25%", risk: "Severe"}, 180: {toxicity: "≈ 30%", risk: "Severe"}, 210: {toxicity: "≈ 35%", risk: "Severe"}, 240: {toxicity: "≈ 40%", risk: "Severe"}, 270: {toxicity: "≈ 45%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}},
+                70: {30: {toxicity: "≈ 10%", risk: "Moderate"}, 60: {toxicity: "≈ 15%", risk: "High"}, 90: {toxicity: "≈ 20%", risk: "High"}, 120: {toxicity: "≈ 25%", risk: "Severe"}, 150: {toxicity: "≈ 30%", risk: "Severe"}, 180: {toxicity: "≈ 35%", risk: "Severe"}, 210: {toxicity: "≈ 40%", risk: "Severe"}, 240: {toxicity: "≈ 45%", risk: "Severe"}, 270: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 60%", risk: "Extremely Dangerous"}}
+            },
+            loratadine: {
+                50: {30: {toxicity: "≈ 1%", risk: "Very Low"}, 60: {toxicity: "≈ 2%", risk: "Low"}, 90: {toxicity: "≈ 3%", risk: "Low"}, 120: {toxicity: "≈ 4%", risk: "Low"}, 150: {toxicity: "≈ 5%", risk: "Moderate"}, 180: {toxicity: "≈ 6%", risk: "Moderate"}, 210: {toxicity: "≈ 7%", risk: "Moderate"}, 240: {toxicity: "≈ 8%", risk: "High"}, 270: {toxicity: "≈ 9%", risk: "High"}, 300: {toxicity: "≈ 10%", risk: "Severe"}},
+                60: {30: {toxicity: "≈ 5%", risk: "Low"}, 60: {toxicity: "≈ 10%", risk: "Moderate"}, 90: {toxicity: "≈ 15%", risk: "High"}, 120: {toxicity: "≈ 20%", risk: "High"}, 150: {toxicity: "≈ 25%", risk: "Severe"}, 180: {toxicity: "≈ 30%", risk: "Severe"}, 210: {toxicity: "≈ 35%", risk: "Severe"}, 240: {toxicity: "≈ 40%", risk: "Severe"}, 270: {toxicity: "≈ 45%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}},
+                70: {30: {toxicity: "≈ 10%", risk: "Moderate"}, 60: {toxicity: "≈ 15%", risk: "High"}, 90: {toxicity: "≈ 20%", risk: "High"}, 120: {toxicity: "≈ 25%", risk: "Severe"}, 150: {toxicity: "≈ 30%", risk: "Severe"}, 180: {toxicity: "≈ 35%", risk: "Severe"}, 210: {toxicity: "≈ 40%", risk: "Severe"}, 240: {toxicity: "≈ 45%", risk: "Severe"}, 270: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 60%", risk: "Extremely Dangerous"}}
+            },
+            atorvastatin: {
+                50: {30: {toxicity: "≈ 1%", risk: "Very Low"}, 60: {toxicity: "≈ 2%", risk: "Low"}, 90: {toxicity: "≈ 3%", risk: "Low"}, 120: {toxicity: "≈ 4%", risk: "Low"}, 150: {toxicity: "≈ 5%", risk: "Moderate"}, 180: {toxicity: "≈ 6%", risk: "Moderate"}, 210: {toxicity: "≈ 7%", risk: "Moderate"}, 240: {toxicity: "≈ 8%", risk: "High"}, 270: {toxicity: "≈ 9%", risk: "High"}, 300: {toxicity: "≈ 10%", risk: "Severe"}},
+                60: {30: {toxicity: "≈ 5%", risk: "Low"}, 60: {toxicity: "≈ 10%", risk: "Moderate"}, 90: {toxicity: "≈ 15%", risk: "High"}, 120: {toxicity: "≈ 20%", risk: "High"}, 150: {toxicity: "≈ 25%", risk: "Severe"}, 180: {toxicity: "≈ 30%", risk: "Severe"}, 210: {toxicity: "≈ 35%", risk: "Severe"}, 240: {toxicity: "≈ 40%", risk: "Severe"}, 270: {toxicity: "≈ 45%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}},
+                70: {30: {toxicity: "≈ 10%", risk: "Moderate"}, 60: {toxicity: "≈ 15%", risk: "High"}, 90: {toxicity: "≈ 20%", risk: "High"}, 120: {toxicity: "≈ 25%", risk: "Severe"}, 150: {toxicity: "≈ 30%", risk: "Severe"}, 180: {toxicity: "≈ 35%", risk: "Severe"}, 210: {toxicity: "≈ 40%", risk: "Severe"}, 240: {toxicity: "≈ 45%", risk: "Severe"}, 270: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 60%", risk: "Extremely Dangerous"}}
+            },
+            alprazolam: {
+                50: {30: {toxicity: "≈ 1%", risk: "Very Low"}, 60: {toxicity: "≈ 2%", risk: "Low"}, 90: {toxicity: "≈ 3%", risk: "Low"}, 120: {toxicity: "≈ 4%", risk: "Low"}, 150: {toxicity: "≈ 5%", risk: "Moderate"}, 180: {toxicity: "≈ 6%", risk: "Moderate"}, 210: {toxicity: "≈ 7%", risk: "Moderate"}, 240: {toxicity: "≈ 8%", risk: "High"}, 270: {toxicity: "≈ 9%", risk: "High"}, 300: {toxicity: "≈ 10%", risk: "Severe"}},
+                60: {30: {toxicity: "≈ 5%", risk: "Low"}, 60: {toxicity: "≈ 10%", risk: "Moderate"}, 90: {toxicity: "≈ 15%", risk: "High"}, 120: {toxicity: "≈ 20%", risk: "High"}, 150: {toxicity: "≈ 25%", risk: "Severe"}, 180: {toxicity: "≈ 30%", risk: "Severe"}, 210: {toxicity: "≈ 35%", risk: "Severe"}, 240: {toxicity: "≈ 40%", risk: "Severe"}, 270: {toxicity: "≈ 45%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}},
+                70: {30: {toxicity: "≈ 10%", risk: "Moderate"}, 60: {toxicity: "≈ 15%", risk: "High"}, 90: {toxicity: "≈ 20%", risk: "High"}, 120: {toxicity: "≈ 25%", risk: "Severe"}, 150: {toxicity: "≈ 30%", risk: "Severe"}, 180: {toxicity: "≈ 35%", risk: "Severe"}, 210: {toxicity: "≈ 40%", risk: "Severe"}, 240: {toxicity: "≈ 45%", risk: "Severe"}, 270: {toxicity: "≈ 50%", risk: "Extremely Dangerous"}, 300: {toxicity: "≈ 60%", risk: "Extremely Dangerous"}}
+            }
+        };
+
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            const medication = document.getElementById('medication').value;
+            const temperature = document.getElementById('temperature').value;
+            const duration = document.getElementById('duration').value;
+            const resultDiv = document.getElementById('result');
+
+            if (medication && temperature && duration) {
+                const toxicityData = data[medication][temperature][duration];
+                resultDiv.innerHTML = `Toxicity: ${toxicityData.toxicity}, Risk: ${toxicityData.risk}`;
+                resultDiv.className = 'result ' + toxicityData.risk.replace(" ", "\\ ");
+                resultDiv.style.display = 'block';
+            } else {
+                resultDiv.innerHTML = 'Please select all fields.';
+                resultDiv.className = 'result';
+                resultDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
